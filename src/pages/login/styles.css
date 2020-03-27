@@ -13,15 +13,38 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;
+    margin-top: 0px;
     text-align: center;
   }
   
+  .logo {
+    margin-top: 50px;
+  }
+
+  .overflow{
+    overflow: hidden;
+  }
+
+  .form-control {
+    margin: auto;
+  }
+
+  .form-center {
+    text-align:center;
+    margin-top: 50px;
+  }
+
+  .small, small {
+    font-size: 80%;
+    font-weight: 700;
+    margin: auto;
+}
   .btn-login {
     font-size: 0.9rem;
     letter-spacing: 0.05rem;
     padding: 0.75rem 1rem;
     border-radius: 2rem;
+    margin: auto;
   }
   
   
