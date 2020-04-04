@@ -9,5 +9,8 @@ body {
 }
 
 #sticky-footer {
-  flex-shrink: none;
+  position:absolute;
+  background-color: #ff0000;
+  bottom:0;
+  width:100%;
 }

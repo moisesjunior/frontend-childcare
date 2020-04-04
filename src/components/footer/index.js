@@ -6,9 +6,11 @@ import './styles.css';
 class Footer extends Component {
     render(){
         return (
-            <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+            <footer id="sticky-footer" class="py-2 text-white-50">
                 <div class="container text-center">
-                    <small>Copyright &copy; Your Website</small>
+                    <small>Created by Moisés Junior</small>
+                    <br></br>
+                    <small>Copyright &copy; ChildCare</small>
                 </div>
             </footer>
         )

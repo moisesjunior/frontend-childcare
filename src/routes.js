@@ -26,9 +26,10 @@ const Routes = () => (
       <Route path="/signup" component={() => <h1>SignUp</h1>} />
       <PrivateRoute path="/app" component={Home} />
       <PrivateRoute path="/usuarios" component={() => <h1>Usuarios</h1>} />
+      <PrivateRoute path="/pacientes" component={() => <h1>Pacientes</h1>} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>
 );
 
-export default Routes;
+export default Routes

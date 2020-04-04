@@ -9,10 +9,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
 class Login extends Component {
-    state = {
-        email: "",
-        password: "",
-        error: ""
+    constructor(props){
+        super(props);
+
+        this.stateInicial = {
+            usr_email: '',
+            usr_password: ''
+        }
+
+        this.state = this.stateInicial
     }
 
     handleSignIn = async e => {
@@ -37,20 +42,18 @@ class Login extends Component {
     render(){
         return (
             <div className="overflow">
-                <div className="container logo">
+                <div className="container">
                     <div className="row center">
-                        <img src={logo} alt="" width="382px" height="200px"/>
+                        <img class="image" src={logo} alt="" width="382px" height="200px"/>
                     </div>
                 </div>
                 <div className="container form-center">
                     {this.state.error && <p>{this.state.error}</p>}
                     <form onSubmit={this.handleSignIn}>
                         <div className="form-group col">
-                            <label className="form-label">Enter e-mail address</label>
                             <input type="email" name="usr_email" className="col-md-5 form-control" placeholder="Enter e-mail address" required onChange={e => this.setState({ usr_email: e.target.value })}/>
                         </div>
                         <div className="form-group col">
-                            <label className="form-label">Password</label>
                             <input type="password" name="usr_password" className="col-md-5 form-control" placeholder="Password" required onChange={e => this.setState({ usr_password: e.target.value })}/>
                         </div>
                         <div className="row">
