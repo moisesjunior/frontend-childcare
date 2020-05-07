@@ -1,58 +1,85 @@
-* {
-  margin: 0;
-  padding: 0;
-  outline: 0;
-  box-sizing: border-box;
-}
-
-  .container {
-    justify-content: center;
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
   }
 
+  body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+  }
+
+  .btn-submit {
+    background-color: #4fabc9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 400px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+    margin-top: 1%;
+  }
+
+  .btn-submit:hover {
+    opacity: 0.7;
+  }
+
+  input[type=email], input[type=password] {
+    width: 400px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 2rem;
+  }
+
+  .image {
+    width:"382px";
+    height:"200px"
+  }
   .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0px;
-    text-align: center;
+    text-align: center;    
   }
   
   .logo {
     margin-top: 50px;
   }
 
+  .container {
+    justify-content: center;
+    margin-top: 50px;
+    padding: 16px;
+  }
+
+  .container-form {
+    justify-content: center;
+    margin-top: 10px;
+    padding: 16px;
+  }
+
   .overflow{
     overflow: hidden;
   }
 
-  .form-control {
-    margin: auto;
-  }
-
   .form-center {
     text-align:center;
-    margin-top: 50px;
   }
 
-  .small, small {
+  .small{
     font-size: 80%;
     font-weight: 700;
     margin: auto;
-}
-  .btn-login {
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
-    padding: 0.75rem 1rem;
-    border-radius: 2rem;
-    margin: auto;
-    margin-top: 40px;
-  }
-
-  .btn-danger {
-    background-color: #ff0000;
-  }
-
-  .image {
-    background-color: white;
+    float: right;
   }
   

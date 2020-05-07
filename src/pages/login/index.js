@@ -5,7 +5,6 @@ import api from "../../services/api";
 import { login } from "../../services/auth";
 import logo from "../../assets/logo.png";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
 class Login extends Component {
@@ -29,11 +28,10 @@ class Login extends Component {
             try {
                 const response = await api.post("/login", { usr_email, usr_password });
                 login(response.data.token);
-                this.props.history.push("/app");
+                this.props.history.push("/home");
             } catch (err) {
                 this.setState({
-                error:
-                    err.response.data.mensagem
+                    error: err.response.data.mensagem
                 });
             }
         }
@@ -43,25 +41,23 @@ class Login extends Component {
         return (
             <div className="overflow">
                 <div className="container">
-                    <div className="row center">
-                        <img class="image" src={logo} alt="" width="382px" height="200px"/>
+                    <div className="row">
+                        <img src={logo} className="center" alt="" width="382px" height="200px"/>
                     </div>
                 </div>
-                <div className="container form-center">
+                <div className="container-form">
                     {this.state.error && <p>{this.state.error}</p>}
                     <form onSubmit={this.handleSignIn}>
-                        <div className="form-group col">
-                            <input type="email" name="usr_email" className="col-md-5 form-control" placeholder="Enter e-mail address" required onChange={e => this.setState({ usr_email: e.target.value })}/>
+                        <div className="form-center">
+                            <input type="email" name="usr_email" size="50" placeholder="Enter e-mail address" required onChange={e => this.setState({ usr_email: e.target.value })}/>
                         </div>
-                        <div className="form-group col">
-                            <input type="password" name="usr_password" className="col-md-5 form-control" placeholder="Password" required onChange={e => this.setState({ usr_password: e.target.value })}/>
+                        <div className="form-center">
+                            <input type="password" name="usr_password" className="" placeholder="Password" required onChange={e => this.setState({ usr_password: e.target.value })}/>
                         </div>
-                        <div className="row">
-                            <button className="col-md-5 btn btn-lg btn-danger btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                        <div className="form-center">
+                            <button className="btn-submit" type="submit">Sign in</button>
                         </div>
-                        <div className="row">
-                            <a href="/" className="small">Forgot password?</a>
-                        </div>
+                        <a href="/" className="small">Forgot password?</a>
                     </form>
                 </div>
             </div>
