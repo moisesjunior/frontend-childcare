@@ -7,6 +7,11 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #fff;
+    background: #ffe6e6;
     color: #333;
+}
+
+div.body-content{
+  /** Essa margem vai evitar que o conteudo fique por baixo do rodapé **/
+  margin-bottom: 40px;
 }

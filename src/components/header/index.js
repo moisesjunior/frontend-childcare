@@ -1,41 +1,45 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import logo from "../../assets/logo-home.png";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
+import { logout } from '../../services/auth';
 
-class Footer extends Component {
+class Navigation extends Component {
+    handleLogout = e => {
+        logout();
+        this.props.history.push("/");
+    }
+
     render(){
         return (
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-                <div class="container">
-                    <a class="navbar-brand" href="#">
-                        <img src="" alt=""/>
-                        </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
-                </nav>
+            <div className="fixed-header">
+                <header>
+                    <nav className="navbar navbar-expand-sm navbar-light">
+                        <Link to="/home" className="navbar-brand">
+                            <img src={logo} alt="" width="40px"/>
+                        </Link>
+                        <ul className="navbar-nav mr-auto">
+                            <li>
+                                <Link className="link" to="/agenda">Agenda</Link>
+                            </li>
+                            <li>
+                                <Link className="link" to="/prontuario">Prontuários</Link>
+                            </li>
+                            <li>
+                                <Link className="link" to="/pacientes">Pacientes</Link>
+                            </li>
+                        </ul>
+                        <ul className="navbar-nav">
+                            <li className="nav-logout">
+                                <Link className="nav-button link" to="#" onClick={this.handleLogout}>Sair</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
         )
     }
 }
 
-export default Footer;
+export default withRouter(Navigation);
