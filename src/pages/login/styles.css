@@ -30,7 +30,7 @@
     opacity: 0.7;
   }
 
-  input[type=email], input[type=password] {
+  .input-login {
     width: 400px;
     padding: 12px 20px;
     margin: 8px 0;

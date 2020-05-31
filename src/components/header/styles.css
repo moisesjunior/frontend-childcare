@@ -33,7 +33,7 @@
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 8px 0px 8px 16px !important;
+    padding: 4px 0px 6px 16px !important;
   }
 
   .navbar-brand {
@@ -53,7 +53,7 @@
   .link{
     font-weight: bold;
     color: white;
-    padding: 25px 16px;
+    padding: 23.5px 16px;
     text-decoration: none;
   }
 
@@ -64,7 +64,7 @@
   }
 
   .active{
-    background-color: red !important;
+    background-color: #4fabc9 !important;
   }
 
   .nav-logout {

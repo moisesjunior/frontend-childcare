@@ -49,10 +49,10 @@ class Login extends Component {
                     {this.state.error && <p>{this.state.error}</p>}
                     <form onSubmit={this.handleSignIn}>
                         <div className="form-center">
-                            <input type="email" name="usr_email" size="50" placeholder="Enter e-mail address" required onChange={e => this.setState({ usr_email: e.target.value })}/>
+                            <input className="input-login" type="email" name="usr_email" size="50" placeholder="Enter e-mail address" required onChange={e => this.setState({ usr_email: e.target.value })}/>
                         </div>
                         <div className="form-center">
-                            <input type="password" name="usr_password" className="" placeholder="Password" required onChange={e => this.setState({ usr_password: e.target.value })}/>
+                            <input className="input-login" type="password" name="usr_password" placeholder="Password" required onChange={e => this.setState({ usr_password: e.target.value })}/>
                         </div>
                         <div className="form-center">
                             <button className="btn-submit" type="submit">Sign in</button>

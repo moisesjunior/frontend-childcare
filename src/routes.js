@@ -3,7 +3,9 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Login from "./pages/login/index";
 import Home from "./pages/home/index";
+import Patient from "./pages/patients/index";
 import Schedule from "./pages/schedule/index";
+import PatientForm from "./pages/patient-form/index";
 
 import { isAuthenticated } from "./services/auth";
 
@@ -27,7 +29,9 @@ const Routes = () => (
       <Route path="/signup" component={() => <h1>SignUp</h1>} />
       <PrivateRoute path="/home" component={Home} />
       <PrivateRoute path="/agenda" component={Schedule} />
-      <PrivateRoute path="/pacientes" component={() => <h1>Pacientes</h1>} />
+      <PrivateRoute exact path="/pacientes" component={Patient} />
+      <PrivateRoute path="/pacientes/form" component={PatientForm} />
+      <PrivateRoute path="/medicos" component={() => <h1>Medicos</h1>} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>

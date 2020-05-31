@@ -1,17 +1,18 @@
 import React, { Component } from "react"
-import Modal from '../modal/index'
+import Event from '../modal/index'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction";
+import ptLocales from '@fullcalendar/core/locales/pt-br'
 
 import './styles.css'
 import api from "../../services/api"
 
-const Teste = props => {
+const Events = props => {
     if (props.show) {
-        return <Modal show={props.show} age_id={props.age_id} handleClose={props.handleClose} />
+        return <Event show={props.show} age_id={props.age_id} age_date={props.age_date} age_start={props.age_start} handleClose={props.handleClose} />
     } else {
         return null
     }
@@ -27,11 +28,17 @@ class Calendar extends Component {
         };
     }
 
-    handleDateClick = () => {
+    handleDateClick = info => {
+        const age_full_date = info.dateStr.split("T")
+        const age_date = age_full_date[0]
+        const age_start = age_full_date[1]
         this.setState({
             show: true,
-            age_id: ''
+            age_id: '',
+            age_date: age_date,
+            age_start: age_start
         })       
+        console.log(this.state)
     }
 
     handleClose = () => {
@@ -39,11 +46,15 @@ class Calendar extends Component {
     }
 
     componentDidMount() {
-        this.setEvents()
+        this.setEvents(true)
         this.event = setInterval(
-            () => this.setEvents(),
+            () => this.setEvents(true),
             300000
         );
+    }
+
+    componentWillUnmount(){
+        this.setEvents(false)
     }
 
     time = {
@@ -53,11 +64,13 @@ class Calendar extends Component {
         textColor: 'black'
     }
 
-    setEvents = async () => {
-        const response = await api.get('/event')
-        this.setState({
-            events: response.data
-        })
+    setEvents = async (bool) => {
+        if(bool){
+            const response = await api.get('/event')
+            this.setState({
+                events: response.data
+            })
+        }
     } 
 
     eventClick = (info) => {
@@ -69,15 +82,21 @@ class Calendar extends Component {
 
     render(){
         return(
-            <div className="container-div">
+            <div className="container-div body-content">
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
+                    timeZone="none"
                     defaultView="timeGridWeek"
-                    locale="pt-br"
-                    slotDuration='00:10:00'
+                    locale={ptLocales}
+                    slotDuration='00:30:00'
                     slotLabelInterval='00:30'
-                    minTime="08:00:00"
-                    maxTime="22:00:00"
+                    slotLabelFormat={{
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        omitZeroMinute: false
+                    }}
+                    minTime="07:00:00"
+                    maxTime="23:00:00"
                     eventTimeFormat={this.time}
                     header={{
                         left: 'prev,next,today',
@@ -92,11 +111,12 @@ class Calendar extends Component {
                     selectable={true}
                     dateClick={this.handleDateClick}
                     dragRevertDuration={0}
-                    eventLimit={true}
+                    eventLimit={false}
                     displayEventEnd={true}
                     eventClick={this.eventClick}
+                    noEventsMessage="Nenhuma consulta agendada"
                 />
-                <Teste show={this.state.show} age_id={this.state.age_id} handleClose={this.handleClose}/>
+                <Events show={this.state.show} age_id={this.state.age_id} age_date={this.state.age_date} age_start={this.state.age_start} handleClose={this.handleClose}/>
             </div>
         )
     }

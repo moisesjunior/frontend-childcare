@@ -27,7 +27,7 @@ class Navigation extends Component {
                                 <Link className="link" to="/prontuario">Prontuários</Link>
                             </li>
                             <li>
-                                <Link className="link" to="/usuarios">Pacientes</Link>
+                                <Link className="link" to="/pacientes">Pacientes</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav">
