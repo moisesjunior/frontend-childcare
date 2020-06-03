@@ -23,9 +23,9 @@ class Calendar extends Component {
         super(props);
         this.state = { 
             show: false,
-            events: [],
             age_id: '',
         };
+        this.setEvents()
     }
 
     handleDateClick = info => {
@@ -38,7 +38,6 @@ class Calendar extends Component {
             age_date: age_date,
             age_start: age_start
         })       
-        console.log(this.state)
     }
 
     handleClose = () => {
@@ -46,15 +45,9 @@ class Calendar extends Component {
     }
 
     componentDidMount() {
-        this.setEvents(true)
-        this.event = setInterval(
-            () => this.setEvents(true),
-            300000
-        );
-    }
-
-    componentWillUnmount(){
-        this.setEvents(false)
+        setTimeout(() => {
+            this.setEvents()
+        }, 10000)
     }
 
     time = {
@@ -64,13 +57,12 @@ class Calendar extends Component {
         textColor: 'black'
     }
 
-    setEvents = async (bool) => {
-        if(bool){
-            const response = await api.get('/event')
-            this.setState({
-                events: response.data
-            })
-        }
+    setEvents = async () => {
+        const response = await api.get('/event')
+        this.setState({
+            events: response.data
+        })
+        
     } 
 
     eventClick = (info) => {

@@ -1,11 +1,41 @@
 import React, { Component } from "react";
 import { FiEye, FiEdit, FiXCircle, FiArchive } from "react-icons/fi";
 import { Link, withRouter } from "react-router-dom";
+import api from "../../services/api";
+import swal from '@sweetalert/with-react'
 
 import './styles.css';
 
 const TableBody = props => {
+    const type = props.type
     const response = Object.values(props.response)
+
+    let link = ""
+    let description = ""
+    if(type === "patient"){
+        link = "/pacientes/form/"
+        description = "paciente"
+    }
+
+    const handleDelete = (id) => {
+        swal({
+            title: "Tem certeza que deseja deletar o registro?",
+            text: "Uma vez deletado, não é possível restaurar o registro!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then( async (willDelete) => {
+                if (willDelete) {
+                    const response = await api.delete('/patient/' + id)
+                    swal(response.data, { icon: "success"})
+                        .then(() => {
+                            window.location.href = '/pacientes'
+                        })
+                }
+            });
+        // const response = await api.put('/patient/' + this.state.pat_id, this.state)
+    }
 
     const linhas = response.map((linha, index) => {
         return(
@@ -14,10 +44,10 @@ const TableBody = props => {
                     <div className="dropdown">
                             <button type="button" className="dropbtn" data-toggle="dropdown">Ações</button>
                         <div className="dropdown-content">
-                            <Link className="dropdown-item"><FiArchive className="icon"/>&nbsp;visualizar prontuário></Link>                            
-                            <Link className="dropdown-item"><FiEye className="icon" />&nbsp;visualizar paciente/></Link>                            
-                            <Link className="dropdown-item"><FiEdit className="icon" />&nbsp;editar paciente/></Link>                            
-                            <Link className="dropdown-item"><FiXCircle className="icon" />&nbsp;excluir paciente/></Link>                            
+                            <Link className="dropdown-item" to=""><FiArchive className="icon"/>&nbsp;visualizar prontuário</Link>                            
+                            <Link className="dropdown-item" to={link + linha.id} params={{ pat_id: linha.id }}><FiEye className="icon" />&nbsp;visualizar {description}</Link>                            
+                            <Link className="dropdown-item" to={link + linha.id} params={{ pat_id: linha.id }}><FiEdit className="icon" />&nbsp;editar {description}</Link>                            
+                            <a className="dropdown-item" onClick={() => handleDelete(linha.id)}><FiXCircle className="icon" />&nbsp;excluir {description}</a>                            
                         </div>
                     </div> 
                 </td>
@@ -58,7 +88,6 @@ const TableHead = props => {
             <th className="th-center" width="10%">{header.col5}</th>
             <th className="th-center" width="20%">{header.col6}</th>
         </tr>
-       console.log(headers) 
     
     return (
         <thead>

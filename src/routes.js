@@ -30,8 +30,10 @@ const Routes = () => (
       <PrivateRoute path="/home" component={Home} />
       <PrivateRoute path="/agenda" component={Schedule} />
       <PrivateRoute exact path="/pacientes" component={Patient} />
-      <PrivateRoute path="/pacientes/form" component={PatientForm} />
+      <PrivateRoute exact path="/pacientes/form/" component={PatientForm} />
+      <PrivateRoute exact path="/pacientes/form/:id" component={PatientForm} />
       <PrivateRoute path="/medicos" component={() => <h1>Medicos</h1>} />
+      <PrivateRoute path="/medicos/form" component={PatientForm} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>

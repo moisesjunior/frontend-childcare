@@ -10,13 +10,14 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import InputMask from 'react-input-mask';
 import axios from "axios";
 import swal from '@sweetalert/with-react'
+import Select from '../../components/select2'
 
 class PatientForm extends Component {
     constructor(props) {
         super(props);
-
+    
         this.stateInicial = {
-            pat_id: props.pat_id,
+            pat_id: this.props.match.params.id,
             pat_name: "",
             pat_birth: "",
             pat_gender: "",
@@ -53,7 +54,7 @@ class PatientForm extends Component {
             pat_medicines: "",
             pat_diseases: ""
         }
-
+        
         this.state = this.stateInicial
     }
 
@@ -99,7 +100,7 @@ class PatientForm extends Component {
         })
     }
 
-    componentDidMount = async () => {
+    componentDidMount() {
         if (this.state.pat_id) {
             this.loadValues()
         }
@@ -134,19 +135,21 @@ class PatientForm extends Component {
         }         
     }
 
+    handleClose = () => {
+        window.location = "/pacientes"
+    }
+
     handleSubmit = async e => {
         e.preventDefault()
-        const { age_type_con, age_type_ate, age_status, age_date, age_start, age_end, age_patient, age_doctor, age_description } = this.state;
         try {
-            if (this.state.age_id) {
-                const response = await api.put('/patient/' + this.state.age_id, { age_type_con, age_type_ate, age_status, age_date, age_start, age_end, age_patient, age_doctor, age_description })
-                console.log(response.data)
+            if (this.state.pat_id) {
+                const response = await api.put('/patient/' + this.state.pat_id, this.state)
                 swal("AVISO", response.data, "success", { closeOnClickOutside: false })
                     .then(() => {
                         window.location.href = '/pacientes'
                     })
             } else {
-                const response = await api.post('/patient', { age_type_con, age_type_ate, age_status, age_date, age_start, age_end, age_patient, age_doctor, age_description })
+                const response = await api.post('/patient', this.state)
                 swal("AVISO", response.data, "success")
                     .then(() => {
                         window.location.href = '/pacientes'
@@ -262,14 +265,14 @@ class PatientForm extends Component {
                                 <label htmlFor="pat_blood_type">Tipo sanguíneo</label>
                                 <select required className="form-control" value={this.state.pat_blood_type} onChange={e => this.setState({ pat_blood_type: e.target.value })} name="pat_blood_type" id="pat_blood_type">
                                     <option value=""></option>
-                                    <option value="M">A+</option>
-                                    <option value="F">A-</option>
-                                    <option value="M">AB+</option>
-                                    <option value="F">AB-</option>
-                                    <option value="M">B+</option>
-                                    <option value="F">B-</option>
-                                    <option value="M">O+</option>
-                                    <option value="F">O-</option>
+                                    <option value="1">A+</option>
+                                    <option value="2">A-</option>
+                                    <option value="3">AB+</option>
+                                    <option value="4">AB-</option>
+                                    <option value="5">B+</option>
+                                    <option value="6">B-</option>
+                                    <option value="7">O+</option>
+                                    <option value="8">O-</option>
                                 </select>
                             </div>
                             <div className="col-md-1">
@@ -292,23 +295,16 @@ class PatientForm extends Component {
                                 <label htmlFor="pat_skin_color">Cor da pele</label>
                                 <select required className="form-control" value={this.state.pat_skin_color} onChange={e => this.setState({ pat_skin_color: e.target.value })} name="pat_skin_color" id="pat_skin_color">
                                     <option value=""></option>
-                                    <option value="M">Branco</option>
-                                    <option value="F">Pardo</option>
-                                    <option value="M">Preto</option>
-                                    <option value="F">Indígena</option>
-                                    <option value="M">Amarelo</option>
+                                    <option value="1">Branco</option>
+                                    <option value="2">Pardo</option>
+                                    <option value="3">Preto</option>
+                                    <option value="4">Indígena</option>
+                                    <option value="5">Amarelo</option>
                                 </select>
                             </div>
                             <div className="col-md-4">
                                 <label htmlFor="pat_doc_usr_id">Médico responsável</label>
-                                <select required className="form-control" value={this.state.pat_doc_usr_id} onChange={e => this.setState({ pat_doc_usr_id: e.target.value })} name="pat_doc_usr_id" id="pat_doc_usr_id">
-                                    <option value=""></option>
-                                    <option value="M">Branco</option>
-                                    <option value="F">Pardo</option>
-                                    <option value="M">Preto</option>
-                                    <option value="F">Indígena</option>
-                                    <option value="M">Amarelo</option>
-                                </select>
+                                <Select required className="form-control" value={this.state.pat_doc_usr_id} onChange={e => this.setState({ pat_doc_usr_id: e.value })} name="pat_doc_usr_id" id="pat_doc_usr_id" />
                             </div>
                         </div>
                         <div className="form-row top">
@@ -388,7 +384,7 @@ class PatientForm extends Component {
                                     value={this.state.pat_resp_tel1} onChange={e => this.setState({ pat_resp_tel1: e.target.value })} className="form-control" id="pat_resp_tel1" name="pat_resp_tel1"
                                 />
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-md-3">
                                 <label htmlFor="pat_resp_email1">Email</label>
                                 <input required type="email" value={this.state.pat_resp_email1} onChange={e => this.setState({ pat_resp_email1: e.target.value })} className="form-control" id="pat_resp_email1" name="pat_resp_email1" />
                             </div>
@@ -411,7 +407,7 @@ class PatientForm extends Component {
                             </div>
                             <div className="col-md-2">
                                 <label htmlFor="pat_resp_birth2">Data de nascimento</label>
-                                <input type="date" value={this.state.pat_resp_birth2} onChange={e => this.setState({ pat_resp_birth2: e.target.value })} className="form-control" id="pat_resp_birth2" name="pat_resp_birth2" />
+                                <input type="date" value={this.state.pat_resp_birth2 || ''} onChange={e => this.setState({ pat_resp_birth2: e.target.value })} className="form-control" id="pat_resp_birth2" name="pat_resp_birth2" />
                             </div>
                         </div>
                         <div className="form-row top-15px">
@@ -439,13 +435,13 @@ class PatientForm extends Component {
                                     value={this.state.pat_resp_tel2} onChange={e => this.setState({ pat_resp_tel2: e.target.value })} className="form-control" id="pat_resp_tel2" name="pat_resp_tel2"
                                 />
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-md-3">
                                 <label htmlFor="pat_resp_email2">Email</label>
                                 <input type="email" className="form-control" value={this.state.pat_resp_email2} onChange={e => this.setState({ pat_resp_email2: e.target.value })} id="pat_resp_email2" name="pat_resp_email2" />
                             </div>
                         </div>
                         <div className="top">
-                            <Buttons className="top-15px" />
+                            <Buttons handleClose={this.handleClose} className="top-15px" />
                         </div>
                     </form>
                 </div>

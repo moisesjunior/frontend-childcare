@@ -27,7 +27,7 @@ const Select = props => {
         <select required value={value} onChange={onChange} className="select" name={tipo_nome} id={tipo_nome}>
             <option value=""></option>
             {options.map((option, index) => (
-                <option key={index} value={option.usr_id}>{option.usr_name}</option>
+                <option key={index} value={option.value}>{option.label}</option>
             ))}
         </select>
     )

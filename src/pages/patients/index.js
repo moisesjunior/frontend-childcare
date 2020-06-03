@@ -22,7 +22,7 @@ class Patient extends Component {
         return (
             <div>
                 <Navigation />
-                <Link to="/pacientes/form" className="button"><FiUserPlus />Adicionar paciente</Link>
+                <Link to="/pacientes/form/" params={{ pat_id: null }} className="button"><FiUserPlus />Adicionar paciente</Link>
                 <Table data={this.state.data} type="patient"/>
                 <Footer />
             </div>

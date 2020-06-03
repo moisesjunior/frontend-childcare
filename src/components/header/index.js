@@ -29,6 +29,9 @@ class Navigation extends Component {
                             <li>
                                 <Link className="link" to="/pacientes">Pacientes</Link>
                             </li>
+                            <li>
+                                <Link className="link" to="/medicos">Médicos</Link>
+                            </li>
                         </ul>
                         <ul className="navbar-nav">
                             <li className="nav-logout">
