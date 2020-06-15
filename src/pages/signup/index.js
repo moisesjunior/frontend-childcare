@@ -43,27 +43,23 @@ class SignUp extends Component {
 
     handleSignUp = async e => {
         e.preventDefault()
-        if(this.state.error === ""){
-            const { usr_email, usr_password, usr_name } = this.state;
-            if (!usr_email || !usr_password || !usr_name) {
-                this.setState({ error: "Preencha Todas as informações para continuar!" })
-                swal("AVISO", this.state.error, "error") 
-            } else {
-                try {
-                    const response = await api.post("/signup", { usr_name, usr_email, usr_password });
-                    swal("AVISO", response.data, "success", { closeOnClickOutside: false })
-                        .then(() => {
-                            this.props.history.push("/");
-                        })
-                } catch (error) {
-                    this.setState({
-                        error: error.response.data
-                    })
-                    swal("AVISO", error.response.data, "error")
-                }
-            }
-        } else {
+        const { usr_email, usr_password, usr_name } = this.state;
+        if (!usr_email || !usr_password || !usr_name) {
+            this.setState({ error: "Preencha Todas as informações para continuar!" })
             swal("AVISO", this.state.error, "error") 
+        } else {
+            try {
+                const response = await api.post("/signup", { usr_name, usr_email, usr_password });
+                swal("AVISO", response.data, "success", { closeOnClickOutside: false })
+                    .then(() => {
+                        this.props.history.push("/");
+                    })
+            } catch (error) {
+                this.setState({
+                    error: error.response.data
+                })
+                swal("AVISO", error.response.data, "error")
+            }
         }
     };
 
