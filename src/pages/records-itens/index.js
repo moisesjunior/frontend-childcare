@@ -10,8 +10,11 @@ class RecordsItens extends Component {
     constructor(props){
         super(props)
 
+        console.log(props.location)
+
         this.state = {
             pat_id: props.location.state.id,
+            name: props.location.state.name,
             data: []
         }
     }
@@ -22,9 +25,13 @@ class RecordsItens extends Component {
     }
 
     render() {
+        console.log(this.state.name)
         return (
             <div> 
                 <Navigation />
+                <div className="patient-title">
+                    <h3>Prontuário médico - {this.state.name}</h3>
+                </div>
                 <div className="top-40px">
                     <Table data={this.state.data} type="records" />
                 </div>

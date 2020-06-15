@@ -91,6 +91,9 @@ class Home extends Component{
             <div>
                 <Navigation />
                 <div className="container">
+                    <div className="home-title">
+                        <h3>Home</h3>
+                    </div>
                     <div className="center margin-home">
                         <table className="table-home table-bordered table-hover">
                             <thead>

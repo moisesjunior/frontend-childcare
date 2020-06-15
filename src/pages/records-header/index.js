@@ -27,7 +27,8 @@ const TableBody = props => {
                                 pathname: `${link}`,
                                 state: {
                                     id: linha.pat_id,
-                                    action: "visualizar"
+                                    action: "visualizar",
+                                    name: linha.col1
                                 }
                             }}><FiEye className="icon" />&nbsp;visualizar {description}</Link>
                         </div>
@@ -93,7 +94,10 @@ class RecordsHeader extends Component {
         return (
             <div>
                 <Navigation />
-                <div width='100%' className="top-40px container-div table-responsive">
+                <div className="schedule-title">
+                    <h3>Prontuário de pacientes</h3>
+                </div>
+                <div width='100%' className="top-20px container-div table-responsive">
                     <table className="table table-bordered table-hover">
                         <TableHead />
                         <TableBody data={this.state.data}/>

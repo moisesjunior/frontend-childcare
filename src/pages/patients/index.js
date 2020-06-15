@@ -22,6 +22,9 @@ class Patient extends Component {
         return (
             <div>
                 <Navigation />
+                <div className="patient-title">
+                    <h3>Registros de pacientes</h3>
+                </div>
                 <Link to={{
                     pathname: "/pacientes/form/",
                     state: {

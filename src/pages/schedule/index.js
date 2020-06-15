@@ -11,6 +11,9 @@ class Schedule extends Component{
         return(
             <div>
                 <Navigation />
+                <div className="schedule-title">
+                    <h3>Agendamento de consultas</h3>
+                </div>
                 <Calendar/>
                 <Footer />
             </div>

@@ -233,8 +233,6 @@ class Table extends Component {
         const data = this.props.data
         const type = this.props.type
 
-        console.log(data)
-
         return (
             <div width='100%' className="container-div table-responsive">
                 <table className="table table-bordered table-hover">
