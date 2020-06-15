@@ -1,0 +1,99 @@
+.nav-pills>li {
+	float: left
+}
+
+.nav-pills>li>a {
+	border-radius: 4px;
+	border-color: grey;
+	border-top: 1px grey solid;
+	border-right: 1px grey solid;
+	border-left: 1px grey solid;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+	color: #fff;
+	border-radius: 4px;
+	border-bottom: transparent;
+	background-color: #add8e6
+}
+
+.navform {
+	padding-left: 0;
+	padding-right: 0;
+	margin-bottom: 0;
+	height: 40px;
+}
+
+.navform>li {
+	position: relative;
+	display: block
+}
+
+.navform>li>a {
+	position: relative;
+	display: block;
+	list-style: none;
+	text-decoration: none;
+	padding: 10px 15px
+}
+
+.navform>li>a:focus,
+.navform>li>a:hover {
+	text-decoration: none;
+	background-color: #eee
+}
+
+.navform>li.disabled>a {
+	color: #777
+}
+
+.navform>li.disabled>a:focus,
+.navform>li.disabled>a:hover {
+	color: #777;
+	text-decoration: none;
+	cursor: not-allowed;
+	background-color: transparent
+}
+
+.navform .open>a,
+.navform .open>a:focus,
+.navform .open>a:hover {
+	background-color: #eee;
+	border-color: #add8e6
+}
+
+.navform .nav-divider {
+	height: 1px;
+	margin: 9px 0;
+	overflow: hidden;
+	background-color: #add8e6
+}
+
+.navform>li>a>img {
+	max-width: none
+}
+
+.tab-content>.tab-pane {
+	display:none
+}
+.tab-content>.active{
+	display:block
+}
+
+.fade{
+	opacity:0;
+	-webkit-transition:opacity .15s linear;
+	-o-transition:opacity .15s linear;
+	transition:opacity .15s linear
+}
+.fade.in{
+	opacity:1
+}
+
+.margin {
+	border: 1px black solid;
+	padding: 50px 40px 10px 40px;
+	margin-bottom: 50px
+}

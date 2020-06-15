@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import logo from "../../assets/logo-home.png";
-
+import { FiMenu } from "react-icons/fi"
 import './styles.css';
 import { logout } from '../../services/auth';
 
@@ -11,34 +11,32 @@ class Navigation extends Component {
         this.props.history.push("/");
     }
 
+    myFunction = () => {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        } 
+    }
+
     render(){
         return (
             <div className="fixed-header">
                 <header>
-                    <nav className="navbar navbar-expand-sm navbar-light">
-                        <Link to="/home" className="navbar-brand">
-                            <img src={logo} alt="" width="40px"/>
+                    <div className="topnav" id="myTopnav">
+                        <Link to="/home" className="float-left">
+                            <img src={logo} alt="" width="30px" />
                         </Link>
-                        <ul className="navbar-nav mr-auto">
-                            <li>
-                                <Link className="link" to="/agenda">Agenda</Link>
-                            </li>
-                            <li>
-                                <Link className="link" to="/prontuario">Prontuários</Link>
-                            </li>
-                            <li>
-                                <Link className="link" to="/pacientes">Pacientes</Link>
-                            </li>
-                            <li>
-                                <Link className="link" to="/medicos">Médicos</Link>
-                            </li>
-                        </ul>
-                        <ul className="navbar-nav">
-                            <li className="nav-logout">
-                                <Link className="nav-button link" to="#" onClick={this.handleLogout}>Sair</Link>
-                            </li>
-                        </ul>
-                    </nav>
+                        <Link className="float-left" to="/agenda">Agenda</Link>
+                        <Link className="float-left" to="/prontuario">Prontuários</Link>
+                        <Link className="float-left" to="/pacientes">Pacientes</Link>
+                        <Link className="float-left" to="/medicos">Médicos</Link>
+                        <a href="#" className="icon" onClick={this.myFunction}>
+                            <FiMenu></FiMenu>
+                        </a>
+                        <Link className="float-right" to="#" onClick={this.handleLogout}>Sair</Link>
+                    </div>
                 </header>
             </div>
         )

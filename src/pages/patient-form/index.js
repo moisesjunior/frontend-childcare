@@ -15,9 +15,11 @@ import Select from '../../components/select2'
 class PatientForm extends Component {
     constructor(props) {
         super(props);
-    
+
         this.stateInicial = {
-            pat_id: this.props.match.params.id,
+            prevPath: this.props.location.state.prevPath,
+            pat_id: this.props.location.state.id,
+            action: this.props.location.state.action,
             pat_name: "",
             pat_birth: "",
             pat_gender: "",
@@ -95,6 +97,7 @@ class PatientForm extends Component {
             pat_imc: response.data[0].pat_imc,
             pat_skin_color: response.data[0].pat_skin_color,
             pat_doc_usr_id: response.data[0].pat_doc_usr_id,
+            pat_doc_name: response.data[0].pat_doc_name,
             pat_medicines: response.data[0].pat_medicines,
             pat_diseases: response.data[0].pat_diseases
         })
@@ -104,6 +107,7 @@ class PatientForm extends Component {
         if (this.state.pat_id) {
             this.loadValues()
         }
+        
     }
 
     onChangeCEP = async (cep) => {
@@ -150,7 +154,7 @@ class PatientForm extends Component {
                     })
             } else {
                 const response = await api.post('/patient', this.state)
-                swal("AVISO", response.data, "success")
+                swal("AVISO", response.data, "success", { closeOnClickOutside: false })
                     .then(() => {
                         window.location.href = '/pacientes'
                     })
@@ -164,6 +168,7 @@ class PatientForm extends Component {
     }
 
     render() {
+        
         return (
             <div>
                 <Navigation />
@@ -304,7 +309,7 @@ class PatientForm extends Component {
                             </div>
                             <div className="col-md-4">
                                 <label htmlFor="pat_doc_usr_id">Médico responsável</label>
-                                <Select required className="form-control" value={this.state.pat_doc_usr_id} onChange={e => this.setState({ pat_doc_usr_id: e.value })} name="pat_doc_usr_id" id="pat_doc_usr_id" />
+                                <Select required className="form-control" value={this.state.pat_doc_usr_id} onChange={e => this.setState({ pat_doc_usr_id: e.value })}  type="doctor" name="pat_doc_usr_id" id="pat_doc_usr_id" />
                             </div>
                         </div>
                         <div className="form-row top">

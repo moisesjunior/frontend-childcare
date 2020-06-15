@@ -343,8 +343,6 @@
 	border: 0
 }
 
-
-
 .d-table {
 	display: table!important
 }
@@ -711,7 +709,7 @@ tr {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
-  display: block;
+  /* display: block; */
   border: 1px none #000000;
 }
 
@@ -785,4 +783,15 @@ tr {
 
 .icon{
 	text-align: center;
+}
+
+.hide-drop{
+	display: none;
+	visibility: hidden;
+}
+
+.h3{
+	text-align: center;
+	color: #007bff;
+	border: 1px black solid;
 }

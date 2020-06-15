@@ -75,7 +75,7 @@ class Login extends Component {
                         <div className="form-row">
                             <div className="col-md-4"></div>
                             <div className="col-md-4">
-                                <a href="/" className="small">Forgot password?</a>
+                                <a href="/signup" className="small">Ainda não é cadastrado?</a>
                             </div>
                         </div>
                     </form>

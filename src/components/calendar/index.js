@@ -10,14 +10,6 @@ import ptLocales from '@fullcalendar/core/locales/pt-br'
 import './styles.css'
 import api from "../../services/api"
 
-const Events = props => {
-    if (props.show) {
-        return <Event show={props.show} age_id={props.age_id} age_date={props.age_date} age_start={props.age_start} handleClose={props.handleClose} />
-    } else {
-        return null
-    }
-}
-
 class Calendar extends Component {
     constructor(props) {
         super(props);
@@ -49,7 +41,19 @@ class Calendar extends Component {
             this.setEvents()
         }, 10000)
     }
+    
+    Events = show => {
+        if (show) {
+            return <Event show={this.props.show} age_id={this.state.age_id} age_date={this.state.age_date} age_start={this.state.age_start} handleClose={this.handleClose} />
+        } else {
+            return null
+        }
+    }
 
+    componentWillUnmount(){
+        
+    }
+    
     time = {
         hour: '2-digit',
         minute: '2-digit',
@@ -78,7 +82,7 @@ class Calendar extends Component {
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
                     timeZone="none"
-                    defaultView="timeGridWeek"
+                    defaultView="dayGridMonth"
                     locale={ptLocales}
                     slotDuration='00:30:00'
                     slotLabelInterval='00:30'
@@ -87,13 +91,19 @@ class Calendar extends Component {
                         minute: '2-digit',
                         omitZeroMinute: false
                     }}
+                    buttonText={{
+                        today: 'Atual',
+                        month: 'Meses',
+                        listWeek: 'Consultas agendadas (Semana)',
+                        listDay: 'Consultas agendadas (Hoje)'
+                    }}
                     minTime="07:00:00"
                     maxTime="23:00:00"
                     eventTimeFormat={this.time}
                     header={{
-                        left: 'prev,next,today',
+                        left: 'prev,next,today, Click',
                         center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,listDay'
+                        right: 'dayGridMonth,listWeek,listDay'
                     }}
                     allDaySlot={false}
                     showNonCurrentDates={false}
@@ -108,7 +118,7 @@ class Calendar extends Component {
                     eventClick={this.eventClick}
                     noEventsMessage="Nenhuma consulta agendada"
                 />
-                <Events show={this.state.show} age_id={this.state.age_id} age_date={this.state.age_date} age_start={this.state.age_start} handleClose={this.handleClose}/>
+                {this.Events(this.state.show)}
             </div>
         )
     }

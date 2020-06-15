@@ -1,37 +1,12 @@
-import React, { Component, useState, useEffect } from "react"
+import React, { Component} from "react"
 import './styles.css'
 import Buttons from '../buttons/index'
 import api from "../../services/api";
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from '@sweetalert/with-react'
-
-const Select = props => {
-    const [options, setOptions] = useState('')
-    const { value, tipo, tipo_nome, onChange } = props;
-
-    const fetchOptions = async () => {
-        const response = await api.get('/grupo/' + tipo)
-        setOptions(response.data)
-    }
-
-    useEffect(() => {
-        fetchOptions()
-    }, [tipo])
-
-    if (!options) {
-        return <span>Carregando</span>
-    }
-
-    return (
-        <select required value={value} onChange={onChange} className="select" name={tipo_nome} id={tipo_nome}>
-            <option value=""></option>
-            {options.map((option, index) => (
-                <option key={index} value={option.value}>{option.label}</option>
-            ))}
-        </select>
-    )
-}
+import Select from '../../components/select2'
+import { Link, withRouter } from "react-router-dom";
 
 class Event extends Component {
     constructor(props) {
@@ -84,7 +59,6 @@ class Event extends Component {
         try{
             if (this.state.age_id) {
                 const response = await api.put('/event/' + this.state.age_id, { age_type_con, age_type_ate, age_status, age_date, age_start, age_end, age_patient, age_doctor, age_description })
-                console.log(response.data)
                 swal("AVISO", response.data, "success", { closeOnClickOutside: false})
                     .then(() => { 
                         window.location.href = '/agenda'
@@ -106,6 +80,22 @@ class Event extends Component {
 
     render(){
         const { show, handleClose } = this.props;
+
+        const startAppointment = (age_id) => {
+            if (this.state.age_id) {
+                return (
+                    <div className="margin-btn float-left">
+                        <Link to={{
+                            pathname: "/prontuario/form/",
+                            state: {
+                                age_id: this.state.age_id,
+                                action: "adicionar"
+                            }
+                        }} className="btn info">Iniciar Consulta</Link>
+                    </div>
+                )
+            }
+        }
 
         return (
             <div id="schedule" className="modal" show={`${show}`}>
@@ -161,14 +151,14 @@ class Event extends Component {
                             <div className="form-row">
                                 <div className="col-md-12">
                                     <label>Paciente</label>
-                                    <Select required tipo="3" value={this.state.age_patient} onChange={e => this.setState({ age_patient: e.target.value })} tipo_nome="age_patient" />
+                                    <Select required className="form-control" value={this.state.age_patient} onChange={e => this.setState({ age_patient: e.value })} type="patient" name="age_patient" id="age_patient" />
                                 </div>
                             </div>
                             
                             <div className="form-row top-15px">
                                 <div className="col-md-12">
                                     <label>Doutor</label>
-                                    <Select tipo="2" value={this.state.age_doctor} onChange={e => this.setState({ age_doctor: e.target.value })} tipo_nome="age_doctor" />
+                                    <Select required className="form-control" value={this.state.age_doctor} onChange={e => this.setState({ age_doctor: e.value })} type="doctor" name="age_doctor" id="age_doctor" />
                                 </div>
                             </div>
                             <div className="form-row top-15px">
@@ -187,6 +177,7 @@ class Event extends Component {
                                 </div>
                             </div>
                             <div className="top-15px">
+                                {startAppointment(this.state.age_id)}
                                 <Buttons handleClose={handleClose} />
                             </div>
                         </form>
@@ -198,4 +189,4 @@ class Event extends Component {
     
 };
 
-export default Event
+export default withRouter(Event)

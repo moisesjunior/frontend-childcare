@@ -10,3 +10,51 @@ body {
     background: #fff;
     color: #333;
 }
+
+.div-table{
+    width: 100%;
+}
+
+.div-master{
+    width: 100%;
+    margin-top: 10%
+}
+
+.chart-right{
+    width: 50%;
+    float: right;
+}
+
+.chart-left{
+    width: 50%;
+    float: left;
+}
+
+.margin-home{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.table-home {
+	width: 100%;
+	margin-bottom: 1rem;
+	color: #212529;
+	font-size: 13px;
+}
+
+.table-home td,
+.table-home th {
+	padding: .75rem;
+	border-top: 1px solid #dee2e6
+}
+
+.table-home thead th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #dee2e6
+}
+
+.table-home tbody+tbody {
+	border-top: 2px solid #dee2e6
+}
