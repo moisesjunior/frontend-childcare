@@ -32,17 +32,18 @@ class SignUp extends Component {
                 this.setState({
                     error: "As senhas não coincidem, entrar com a mesma senha por favor!!"
                 })
-            } else {
-                this.setState({
-                    error: ""
-                })
             }
+        } else {
+            this.setState({
+                error: ""
+            })
         }
+        
     }
 
     handleSignUp = async e => {
         e.preventDefault()
-        if(this.state.error !== ""){
+        if(this.state.error === ""){
             const { usr_email, usr_password, usr_name } = this.state;
             if (!usr_email || !usr_password || !usr_name) {
                 this.setState({ error: "Preencha Todas as informações para continuar!" })
